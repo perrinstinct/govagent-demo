@@ -9,7 +9,7 @@ info:
 servers:
   - url: https://api.petstore.example.com/v2
     description: Production
-  - url: http://sandbox.petstore.example.com/v2
+  - url: https://sandbox.petstore.example.com/v2
     description: Sandbox
 security:
   - apiKey: []
@@ -19,6 +19,9 @@ tags:
 paths:
   /pets:
     get:
+      tags:
+        - pets
+      summary: List pets
       description: Returns a page of pets, newest first.
       operationId: listPets
       parameters:
@@ -69,6 +72,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Pet"
+        '404':
+          $ref: '#/components/responses/NotFound'
     delete:
       tags: [pets]
       summary: Delete a pet
